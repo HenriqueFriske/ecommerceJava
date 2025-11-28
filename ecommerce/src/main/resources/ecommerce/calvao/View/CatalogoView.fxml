@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" stylesheets="/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecommerce.calvao.App.CatalogoController">
+            <fx:define>
+                <ToggleGroup fx:id="precoToggleGroup" />
+            </fx:define>
+
+        
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="60.0" styleClass="header-bar">
+            <padding>
+                <Insets left="20.0" right="20.0" />
+            </padding>
+            <Label text="Calvão DE CRIA" /> 
+            
+            <HBox alignment="CENTER_RIGHT" spacing="30.0" HBox.hgrow="ALWAYS">
+                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Produtos" />
+                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Promoções" />
+            </HBox>
+        </HBox>
+    </top>
+    
+    
+    
+    <center>
+        <VBox>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            
+            <TextField fx:id="searchField" prefHeight="40.0" promptText="Buscar produtos na página atual">
+                <VBox.margin>
+                    <Insets bottom="15.0" />
+                </VBox.margin>
+            </TextField>
+            
+        
+            <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="NEVER">
+                <Label fx:id="contadorProdutosLabel" style="-fx-font-weight: bold; -fx-font-size: 12pt;" text="Carregando..." />
+            </HBox>
+            
+
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                <FlowPane fx:id="produtosFlowPane" hgap="20.0" vgap="20.0" />
+            </ScrollPane>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </VBox>
+    </center>
+
+    <left>
+        <VBox fx:id="filtroVBox" prefWidth="250.0" styleClass="filter-pane" BorderPane.alignment="TOP_LEFT">
+            
+            <fx:define>
+                <ToggleGroup fx:id="precoToggleGroup" />
+            </fx:define>
+
+            <Label style="-fx-font-size: 16pt; -fx-font-weight: bold;" text="Refine sua busca" />
+            
+            <VBox spacing="5.0">
+                <Label style="-fx-font-size: 12pt; -fx-font-weight: bold;" text="Por preço" />
+                
+                <RadioButton fx:id="allPricesRadio" text="Todos os preços" userData="ALL">
+               <toggleGroup>
+                  <ToggleGroup fx:id="precoToggleGroup" />
+               </toggleGroup></RadioButton>
+                <RadioButton text="Até R$40" toggleGroup="$precoToggleGroup" userData="0-40" />
+                <RadioButton text="R$40 a R$100" toggleGroup="$precoToggleGroup" userData="40-100" />
+                <RadioButton text="R$100 a R$200" toggleGroup="$precoToggleGroup" userData="100-200" />
+                <RadioButton text="R$200 a R$500" toggleGroup="$precoToggleGroup" userData="200-500" />
+                <RadioButton text="Acima de R$500" toggleGroup="$precoToggleGroup" userData="500-MAX" />
+            </VBox>
+            
+            <Button onAction="#handleRedefinirBusca" style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-radius: 3; -fx-padding: 5 10;" text="Redefinir Busca">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </Button>
+        </VBox>
+    </left>
+</BorderPane>
