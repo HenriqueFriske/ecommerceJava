@@ -133,12 +133,27 @@ public class CatalogoController {
 
     private void adicionarProdutoCell(Produto produto) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ecommerce/calvao/View/ProdutoCell.fxml"));
+            // 1. Defina o caminho
+            String path = "/ecommerce/calvao/View/ProdutoCell.fxml";
+            java.net.URL fxmlUrl = getClass().getResource(path);
+
+            // 2. Verificação de segurança (DIAGNÓSTICO)
+            if (fxmlUrl == null) {
+                System.err.println("❌ ERRO GRAVE: Arquivo FXML não encontrado no caminho: " + path);
+                System.err.println("   Verifique se a pasta 'resources/ecommerce/calvao/View' existe e contém 'ProdutoCell.fxml'");
+                return; // Para aqui para não quebrar
+            }
+
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
             VBox produtoCell = fxmlLoader.load();
+            
             ProdutoCellController controller = fxmlLoader.getController();
             controller.setProduto(produto);
+            
             produtosFlowPane.getChildren().add(produtoCell);
-        } catch (IOException e) {
+            
+        } catch (Exception e) { // <-- AGORA PEGA TUDO (IOException, RuntimeException, etc)
+            System.err.println("❌ ERRO AO CRIAR CARD DO PRODUTO: " + produto.getName());
             e.printStackTrace();
         }
     }

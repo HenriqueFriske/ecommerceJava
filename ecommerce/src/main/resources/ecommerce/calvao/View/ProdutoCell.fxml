@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainVBox" alignment="TOP_LEFT" prefHeight="320.0" prefWidth="220.0" spacing="8.0" 
+<VBox fx:id="mainVBox" onMouseClicked="#handleCardClick"  alignment="TOP_LEFT" prefHeight="320.0" prefWidth="220.0" spacing="8.0" 
       style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);" 
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="ecommerce.calvao.Controller.ProdutoCellController">
@@ -49,4 +49,5 @@
             </Label>
         </HBox>
     </VBox>
+        
 </VBox>

@@ -1,6 +1,6 @@
-package ecommerce.calvao.Service;
+package ecommerce.calvao.Service; 
 
-import ecommerce.calvao.Model.Produto;
+import ecommerce.calvao.Model.Produto; 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.UnsupportedEncodingException;
@@ -19,19 +19,12 @@ public class ProductAPI {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
-     * Busca produtos no backend com base nos filtros.
-     * Agora busca TODOS os produtos (limit=1000) de uma vez.
-     * * @param minPrice Preço mínimo.
-     * @param maxPrice Preço máximo.
-     * @param searchTerm Termo de busca por nome.
-     * @return Future com a lista de produtos.
+     * Busca produtos no backend.
      */
-    // CORREÇÃO: Removemos o 'int page' desta linha
     public CompletableFuture<List<Produto>> fetchProducts(Double minPrice, Double maxPrice, String searchTerm) {
         
-        // Define limit=1000 e page=1 fixo para trazer tudo
-        StringBuilder uriBuilder = new StringBuilder(BASE_URL).append("?limit=25&page=1"); 
-        
+        StringBuilder uriBuilder = new StringBuilder(BASE_URL).append("?limit=20&page=1"); 
+       
         if (minPrice != null) {
             uriBuilder.append("&minPrice=").append(minPrice); 
         }
@@ -39,13 +32,12 @@ public class ProductAPI {
             uriBuilder.append("&maxPrice=").append(maxPrice); 
         }
         
-        // Lógica de Busca
         if (searchTerm != null && !searchTerm.trim().isEmpty()) {
             try {
                 String encodedSearch = java.net.URLEncoder.encode(searchTerm.trim(), java.nio.charset.StandardCharsets.UTF_8.toString());
                 uriBuilder.append("&search=").append(encodedSearch); 
             } catch (UnsupportedEncodingException e) {
-                // Ignora falha de encoding
+                // Ignora erro de encoding
             }
         }
 
@@ -58,14 +50,25 @@ public class ProductAPI {
                 .build();
 
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(response -> {
-                    // --- ESPIÃO (DEBUG) ---
-                    System.out.println("STATUS CODE: " + response.statusCode());
-                    System.out.println("RESPOSTA DO SERVIDOR: " + response.body());
-                    // ----------------------
-                    return response.body();
-                })
+                .thenApply(HttpResponse::body)
                 .thenApply(this::parseProducts);
+    }
+
+    /**
+     * Busca um único produto pelo ID.
+     */
+    public CompletableFuture<Produto> fetchProductById(String productId) {
+        String url = BASE_URL + "/" + productId;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Accept", "application/json")
+                .GET()
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenApply(this::parseSingleProduct);
     }
 
     private List<Produto> parseProducts(String responseBody) {
@@ -85,5 +88,20 @@ public class ProductAPI {
             e.printStackTrace();
         }
         return produtos;
+    }
+
+    private Produto parseSingleProduct(String responseBody) {
+        try {
+            JsonNode root = objectMapper.readTree(responseBody);
+            JsonNode dataNode = root.get("data");
+            
+            if (dataNode != null) {
+                return objectMapper.treeToValue(dataNode, Produto.class);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao parsear produto único: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -1,6 +1,7 @@
-/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecomerce/calvao/Controller/ProdutoCellController.java
-/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecomerce/calvao/Service/ProductAPI.java
-/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecomerce/calvao/Model/Produto.java
-/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecomerce/calvao/App/CatalogoController.java
+/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecommerce/calvao/Controller/ProdutoDetalheController.java
+/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecommerce/calvao/App/CatalogoController.java
+/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecommerce/calvao/Controller/ProdutoCellController.java
+/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecommerce/calvao/Model/Produto.java
+/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecommerce/calvao/App/MainApplication.java
+/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecommerce/calvao/Service/ProductAPI.java
 /Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/module-info.java
-/Users/henriquefriske/Documents/calvaofx/ecommerce/src/main/java/ecomerce/calvao/App/MainApplication.java
