@@ -23,11 +23,11 @@
             <padding>
                 <Insets left="20.0" right="20.0" />
             </padding>
-            <Label text="Calvão DE CRIA" /> 
+            <Label text="Calvão De Cria" /> 
             
             <HBox alignment="CENTER_RIGHT" spacing="30.0" HBox.hgrow="ALWAYS">
-                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Produtos" />
-                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Promoções" />
+                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Produtos" textFill="WHITE" />
+                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Promoções" textFill="WHITE" />
             </HBox>
         </HBox>
     </top>
@@ -40,7 +40,7 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
             
-            <TextField fx:id="searchField" prefHeight="40.0" promptText="Buscar produtos na página atual">
+            <TextField fx:id="searchField" prefHeight="40.0" promptText="Buscar produtos">
                 <VBox.margin>
                     <Insets bottom="15.0" />
                 </VBox.margin>

@@ -5,14 +5,14 @@
 
 /* Estilo do Header (topo verde) */
 .header-bar {
-    -fx-background-color: #90ee90; /* Verde claro da imagem */
+    -fx-background-color: #11B687; /* Verde claro da imagem */
     -fx-alignment: center-left;
 }
 
 .header-bar .label {
     -fx-font-size: 20pt;
     -fx-font-weight: bold;
-    -fx-text-fill: #3c3c3c;
+    -fx-text-fill: #ffffff;
 }
 
 /* Estilo do Painel de Filtros */
@@ -39,14 +39,14 @@
 /* Preço com Desconto (Verde e Grande) */
 .price-discount {
     -fx-font-size: 14pt;
-    -fx-text-fill: #008000; /* Verde */
+    -fx-text-fill: #11B687; /* Verde */
     -fx-font-weight: bold;
 }
 
 /* Preço Original (Riscado) */
 .price-original {
     -fx-strikethrough: true;
-    -fx-text-fill: #a0a0a0; /* Cinza */
+    -fx-text-fill: #888888; /* Cinza */
     -fx-font-size: 10pt;
 }
 
