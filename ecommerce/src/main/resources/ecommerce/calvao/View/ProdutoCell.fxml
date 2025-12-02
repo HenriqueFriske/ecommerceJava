@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainVBox" onMouseClicked="#handleCardClick"  alignment="TOP_LEFT" prefHeight="320.0" prefWidth="220.0" spacing="8.0" 
-      style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);" 
+<VBox fx:id="mainVBox" onMouseClicked="#handleCardClick" alignment="TOP_LEFT" prefHeight="320.0" prefWidth="220.0" spacing="8.0" 
+      styleClass="product-cell"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="ecommerce.calvao.Controller.ProdutoCellController">
 
@@ -18,35 +18,18 @@
 
     <StackPane prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 5;">
         <Label fx:id="placeholderLabel" text="Sem Imagem" textFill="#999999" StackPane.alignment="CENTER" />
-        
         <ImageView fx:id="produtoImage" fitHeight="170.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
     </StackPane>
     
-    <Label fx:id="nomeLabel" alignment="TOP_LEFT" maxHeight="40.0" minHeight="40.0" text="Nome do Produto" wrapText="true" VBox.vgrow="ALWAYS">
-        <font>
-            <Font name="System Bold" size="13.0" />
-        </font>
-    </Label>
+    <Label fx:id="nomeLabel" alignment="TOP_LEFT" maxHeight="40.0" minHeight="40.0" text="Nome do Produto" wrapText="true" VBox.vgrow="ALWAYS" styleClass="product-name" />
 
     <VBox spacing="2.0">
-        <Label fx:id="precoOriginalLabel" style="-fx-strikethrough: true;" text="R$ 00,00" textFill="#9e9e9e">
-            <font>
-                <Font size="11.0" />
-            </font>
-        </Label>
+        <Label fx:id="precoOriginalLabel" text="R$ 00,00" styleClass="price-original" />
 
         <HBox alignment="CENTER_LEFT" spacing="8.0">
-            <Label fx:id="precoDescontoLabel" text="R$ 00,00" textFill="#00a650">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Label>
+            <Label fx:id="precoDescontoLabel" text="R$ 00,00" styleClass="price-current" />
             
-            <Label fx:id="descontoBadge" style="-fx-background-color: #ffcccc; -fx-text-fill: #cc0000; -fx-background-radius: 4; -fx-padding: 2 4;" text="0% OFF">
-                <font>
-                    <Font name="System Bold" size="10.0" />
-                </font>
-            </Label>
+            <Label fx:id="descontoBadge" text="0% OFF" styleClass="discount-badge" />
         </HBox>
     </VBox>
         

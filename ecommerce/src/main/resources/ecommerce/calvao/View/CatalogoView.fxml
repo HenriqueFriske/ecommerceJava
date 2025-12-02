@@ -13,26 +13,25 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1000.0" stylesheets="/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecommerce.calvao.App.CatalogoController">
-            <fx:define>
-                <ToggleGroup fx:id="precoToggleGroup" />
-            </fx:define>
+    
+    <fx:define>
+        <ToggleGroup fx:id="precoToggleGroup" />
+    </fx:define>
 
-        
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="60.0" styleClass="header-bar">
             <padding>
                 <Insets left="20.0" right="20.0" />
             </padding>
+            
             <Label text="Calvão De Cria" /> 
             
             <HBox alignment="CENTER_RIGHT" spacing="30.0" HBox.hgrow="ALWAYS">
-                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Produtos" textFill="WHITE" />
-                <Button style="-fx-background-color: transparent; -fx-font-size: 14pt;" text="Promoções" textFill="WHITE" />
+                <Button styleClass="header-button" text="Produtos" />
+                <Button styleClass="header-button" text="Promoções" />
             </HBox>
         </HBox>
     </top>
-    
-    
     
     <center>
         <VBox>
@@ -40,21 +39,20 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
             
-            <TextField fx:id="searchField" prefHeight="40.0" promptText="Buscar produtos">
+            <TextField fx:id="searchField" prefHeight="40.0" promptText="Buscar produtos na página atual">
                 <VBox.margin>
                     <Insets bottom="15.0" />
                 </VBox.margin>
             </TextField>
             
-        
             <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="NEVER">
                 <Label fx:id="contadorProdutosLabel" style="-fx-font-weight: bold; -fx-font-size: 12pt;" text="Carregando..." />
             </HBox>
             
-
             <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
                 <FlowPane fx:id="produtosFlowPane" hgap="20.0" vgap="20.0" />
             </ScrollPane>
+            
             <VBox.margin>
                 <Insets bottom="10.0" />
             </VBox.margin>
@@ -64,14 +62,10 @@
     <left>
         <VBox fx:id="filtroVBox" prefWidth="250.0" styleClass="filter-pane" BorderPane.alignment="TOP_LEFT">
             
-            <fx:define>
-                <ToggleGroup fx:id="precoToggleGroup" />
-            </fx:define>
-
-            <Label style="-fx-font-size: 16pt; -fx-font-weight: bold;" text="Refine sua busca" />
+            <Label styleClass="filter-title" text="Refine sua busca" />
             
             <VBox spacing="5.0">
-                <Label style="-fx-font-size: 12pt; -fx-font-weight: bold;" text="Por preço" />
+                <Label styleClass="filter-subtitle" text="Por preço" />
                 
                 <RadioButton fx:id="allPricesRadio" text="Todos os preços" userData="ALL">
                <toggleGroup>
@@ -85,10 +79,10 @@
             </VBox>
             
             <Button onAction="#handleRedefinirBusca" style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-radius: 3; -fx-padding: 5 10;" text="Redefinir Busca">
-            <VBox.margin>
-               <Insets top="10.0" />
-            </VBox.margin>
-         </Button>
+                <VBox.margin>
+                   <Insets top="10.0" />
+                </VBox.margin>
+             </Button>
         </VBox>
     </left>
 </BorderPane>

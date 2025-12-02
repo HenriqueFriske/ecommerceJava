@@ -1,61 +1,106 @@
 /* src/styles.css */
+
+/* Definição de Cores Globais (Tema) */
 .root {
-    -fx-font-family: "Arial", sans-serif;
+    -fx-font-family: "Roboto";
+    
+    /* Paleta de Cores */
+    -color-primary: #11B687;       /* Verde Principal */
+    -color-bg-default: #f4f4f4;    /* Fundo Cinza Claro */
+    -color-white: #ffffff;
+    -color-text-dark: #3c3c3c;
+    -color-text-light: #ffffff;
+    -color-price: #00a650;
+    -color-discount-bg: #ffcccc;
+    -color-discount-text: #cc0000;
 }
 
-/* Estilo do Header (topo verde) */
+/* --- HEADER --- */
 .header-bar {
-    -fx-background-color: #11B687; /* Verde claro da imagem */
+    -fx-background-color: -color-primary; 
     -fx-alignment: center-left;
+    -fx-padding: 0 20 0 20; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2); 
 }
 
+/* Texto do Logo no Header */
 .header-bar .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 24pt;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: -color-text-light;
 }
 
-/* Estilo do Painel de Filtros */
+/* Botões do Header (Produtos, Promoções) */
+.header-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 14pt;
+    -fx-text-fill: -color-text-light;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.header-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Efeito ao passar o mouse */
+    -fx-background-radius: 5;
+}
+
+/* --- FILTROS (Lado Esquerdo) --- */
 .filter-pane {
+    -fx-background-color: -color-white;
     -fx-padding: 20px;
     -fx-spacing: 15px;
 }
 
-/* Estilo para a Célula de Produto */
+.filter-title {
+    -fx-font-size: 16pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-dark;
+}
+
+.filter-subtitle {
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-dark;
+}
+
+/* --- CARD DO PRODUTO --- */
 .product-cell {
+    -fx-background-color: -color-white;
     -fx-border-color: #e0e0e0;
-    -fx-border-radius: 5px;
-    -fx-padding: 10px;
-    -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 0, 1);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.product-cell:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 4); /* Destaca ao passar o mouse */
+    -fx-border-color: -color-primary; /* Borda verde ao focar */
 }
 
 .product-name {
     -fx-font-weight: bold;
-    -fx-font-size: 10pt;
-    -fx-max-width: 180px;
+    -fx-font-size: 11pt;
+    -fx-text-fill: -color-text-dark;
 }
 
-/* Preço com Desconto (Verde e Grande) */
-.price-discount {
-    -fx-font-size: 14pt;
-    -fx-text-fill: #11B687; /* Verde */
+.price-current {
+    -fx-font-size: 16pt;
+    -fx-text-fill: -color-price;
     -fx-font-weight: bold;
 }
 
-/* Preço Original (Riscado) */
 .price-original {
     -fx-strikethrough: true;
-    -fx-text-fill: #888888; /* Cinza */
-    -fx-font-size: 10pt;
+    -fx-text-fill: #9e9e9e;
+    -fx-font-size: 11pt;
 }
 
-/* Badge de Desconto */
 .discount-badge {
-    -fx-background-color: #ff9999;
-    -fx-padding: 2px 5px;
-    -fx-background-radius: 3px;
-    -fx-text-fill: #990000;
+    -fx-background-color: -color-discount-bg;
+    -fx-padding: 2 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: -color-discount-text;
     -fx-font-weight: bold;
-    -fx-font-size: 9pt;
+    -fx-font-size: 10pt;
 }

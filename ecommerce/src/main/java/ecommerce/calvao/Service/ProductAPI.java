@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ProductAPI {
 
-    private static final String BASE_URL = "http://localhost:3000/api/v1/products";
+    private static final String BASE_URL = "https://apicalvaodecria-production.up.railway.app/api/v1/products";
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
