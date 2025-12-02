@@ -15,6 +15,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,13 +32,12 @@ public class CatalogoController {
 
     private final ProductAPI productAPI = new ProductAPI();
 
-    // Configuração dos intervalos de preço
     private final Map<String, Double[]> priceFilters = Map.of(
         "0-40", new Double[]{0.0, 40.0},
         "40-100", new Double[]{40.0, 100.0},
         "100-200", new Double[]{100.0, 200.0},
         "200-500", new Double[]{200.0, 500.0},
-        "500-MAX", new Double[]{500.0, null}, // Null no max significa "Infinito"
+        "500-MAX", new Double[]{500.0, null},
         "ALL", new Double[]{null, null}
     );
 
@@ -61,7 +61,9 @@ public class CatalogoController {
                     .forEach(rb -> {
                         rb.setToggleGroup(precoToggleGroup);
                         rb.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                            if (newVal) carregarProdutos(); 
+                            if (newVal) {
+                                carregarProdutos(); 
+                            }
                         });
                     });
             }
@@ -69,10 +71,9 @@ public class CatalogoController {
     }
 
     private void carregarProdutos() {
-        produtosFlowPane.getChildren().clear();
-        contadorProdutosLabel.setText("Filtrando produtos...");
+        // Marcador visual de que a busca começou
+        contadorProdutosLabel.setText("Buscando...");
 
-        // 1. Captura os limites de preço selecionados
         Double minPriceTemp = null;
         Double maxPriceTemp = null;
         RadioButton selectedRadio = (RadioButton) precoToggleGroup.getSelectedToggle();
@@ -86,24 +87,18 @@ public class CatalogoController {
             }
         }
         
-        // Variáveis finais para usar dentro do Lambda
         final Double minPrice = minPriceTemp;
         final Double maxPrice = maxPriceTemp;
-        
         String searchTerm = searchField.getText();
         
-        // 2. Chama a API pedindo TUDO (passa null nos preços para o backend não filtrar errado)
         productAPI.fetchProducts(null, null, searchTerm)
                 .thenApply(produtos -> {
-                    // 3. FILTRAGEM INTELIGENTE NO JAVA (CLIENTE)
-                    // Aqui aplicamos a lógica: Preço Promocional x Preço Original
+                    // Filtragem no Java (Cliente)
                     return produtos.stream().filter(p -> {
-                        // Calcula qual o preço real que o cliente vai pagar
                         double precoEfetivo = p.isIsPromotionActive() && p.getPromotionalPrice() > 0 
                                 ? p.getPromotionalPrice() 
                                 : p.getPrice();
                         
-                        // Verifica se está dentro do intervalo selecionado
                         boolean maiorQueMinimo = (minPrice == null) || (precoEfetivo >= minPrice);
                         boolean menorQueMaximo = (maxPrice == null) || (precoEfetivo <= maxPrice);
                         
@@ -111,21 +106,25 @@ public class CatalogoController {
                     }).collect(Collectors.toList());
                 })
                 .thenAccept(produtosFiltrados -> {
-                    // 4. Atualiza a tela com a lista já filtrada corretamente
                     Platform.runLater(() -> {
-                        String textoContador = produtosFiltrados.isEmpty() 
+                        // LIMPEZA DA TELA AGORA ACONTECE AQUI, NA HORA DE DESENHAR
+                        produtosFlowPane.getChildren().clear();
+                        
+                        String texto = produtosFiltrados.isEmpty() 
                                 ? "Nenhum produto encontrado" 
                                 : produtosFiltrados.size() + " produtos encontrados";
-                        contadorProdutosLabel.setText(textoContador);
+                        contadorProdutosLabel.setText(texto);
                         
-                        produtosFiltrados.forEach(this::adicionarProdutoCell);
+                        for (Produto p : produtosFiltrados) {
+                            adicionarProdutoCell(p);
+                        }
                     });
                 })
                 .exceptionally(e -> {
                     Platform.runLater(() -> {
-                        String msg = (e.getCause() != null) ? e.getCause().getMessage() : e.getMessage();
-                        contadorProdutosLabel.setText("Erro: " + msg);
+                        System.err.println("❌ Erro na busca de produtos:");
                         e.printStackTrace();
+                        contadorProdutosLabel.setText("Erro ao carregar.");
                     });
                     return null; 
                 });
@@ -133,15 +132,10 @@ public class CatalogoController {
 
     private void adicionarProdutoCell(Produto produto) {
         try {
-            // 1. Defina o caminho
-            String path = "/ecommerce/calvao/View/ProdutoCell.fxml";
-            java.net.URL fxmlUrl = getClass().getResource(path);
-
-            // 2. Verificação de segurança (DIAGNÓSTICO)
+            URL fxmlUrl = getClass().getResource("/ecommerce/calvao/View/ProdutoCell.fxml");
             if (fxmlUrl == null) {
-                System.err.println("❌ ERRO GRAVE: Arquivo FXML não encontrado no caminho: " + path);
-                System.err.println("   Verifique se a pasta 'resources/ecommerce/calvao/View' existe e contém 'ProdutoCell.fxml'");
-                return; // Para aqui para não quebrar
+                System.err.println("❌ FXML NÃO ENCONTRADO: /ecommerce/calvao/View/ProdutoCell.fxml");
+                return;
             }
 
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
@@ -152,8 +146,8 @@ public class CatalogoController {
             
             produtosFlowPane.getChildren().add(produtoCell);
             
-        } catch (Exception e) { // <-- AGORA PEGA TUDO (IOException, RuntimeException, etc)
-            System.err.println("❌ ERRO AO CRIAR CARD DO PRODUTO: " + produto.getName());
+        } catch (Exception e) {
+            System.err.println("❌ Erro ao criar card para: " + produto.getName());
             e.printStackTrace();
         }
     }
