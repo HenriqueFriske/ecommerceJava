@@ -1,6 +1,4 @@
-/* src/styles.css */
 
-/* Definição de Cores Globais (Tema) */
 .root {
     -fx-font-family: "Roboto";
     
@@ -15,7 +13,6 @@
     -color-discount-text: #cc0000;
 }
 
-/* --- HEADER --- */
 .header-bar {
     -fx-background-color: -color-primary; 
     -fx-alignment: center-left;
@@ -23,14 +20,12 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2); 
 }
 
-/* Texto do Logo no Header */
 .header-bar .label {
     -fx-font-size: 24pt;
     -fx-font-weight: bold;
     -fx-text-fill: -color-text-light;
 }
 
-/* Botões do Header (Produtos, Promoções) */
 .header-button {
     -fx-background-color: transparent;
     -fx-font-size: 14pt;
@@ -44,7 +39,6 @@
     -fx-background-radius: 5;
 }
 
-/* --- FILTROS (Lado Esquerdo) --- */
 .filter-pane {
     -fx-background-color: -color-white;
     -fx-padding: 20px;

@@ -3,6 +3,6 @@ ecommerce/calvao/App/MainApplication.class
 ecommerce/calvao/Controller/ProdutoCellController.class
 module-info.class
 ecommerce/calvao/Model/Produto.class
+ecommerce/calvao/Controller/CatalogoController.class
 ecommerce/calvao/Controller/ProdutoDetalheController.class
 ecommerce/calvao/Service/ProductAPI.class
-ecommerce/calvao/App/CatalogoController.class

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" stylesheets="/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecommerce.calvao.App.CatalogoController">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" stylesheets="/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecommerce.calvao.Controller.CatalogoController">
     
     <fx:define>
         <ToggleGroup fx:id="precoToggleGroup" />
